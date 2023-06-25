@@ -62,18 +62,25 @@ const actions = {
 
   //   update todo
   updateTodo(id: String, todo: updateTodo) {
+    // this method is bit slowdown the code cz its loop through all the items
     // @ts-ignore
-    this.items = this.items.map((item: Todo) => {
-      if (item.id === id) {
-        return {
-          ...item,
-          ...todo,
-          updatedAt: new Date(),
-        };
-      } else {
-        return item;
-      }
-    });
+    // this.items = this.items.map((item: Todo) => {
+    //   if (item.id === id) {
+    //     return {
+    //       ...item,
+    //       ...todo,
+    //       updatedAt: new Date(),
+    //     };
+    //   } else {
+    //     return item;
+    //   }
+    // });
+    const index = this.items.findIndex((item: Todo) => item.id === id);
+    this.items[index] = {
+      ...this.items[index],
+      ...todo,
+      updatedAt: new Date(),
+    };
   },
 };
 

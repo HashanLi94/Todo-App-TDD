@@ -75,11 +75,24 @@ describe("useTodoStore", () => {
     expect(store.items[0].createdAt.getFullYear()).toBe(2021);
   });
 
-  test("remove todo", () => {
+  test("remove a todo", () => {
     store.addTodo({ title: "test title" });
     const todo = store.items[0];
     // @ts-ignore
     store.removeTodo(todo.id);
     expect(store.items).toStrictEqual([]);
+  });
+
+  test("update a todo", () => {
+    store.addTodo({ title: "title" });
+
+    const todo = store.items[0];
+    // @ts-ignore
+    store.updateTodo(todo.id, { title: "updated title", isCompleted: true });
+
+    const updated = store.items[0];
+
+    expect(updated?.title).toBe("updated title");
+    expect(updated?.isCompleted).toBe(true);
   });
 });
